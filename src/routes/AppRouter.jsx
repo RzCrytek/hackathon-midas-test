@@ -4,9 +4,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 
 import HomePage from '../pages/HomePage';
-import TestPage1 from '../pages/test/testPage1';
-import TestPage2 from '../pages/test/testPage2';
-import TestPage3 from '../pages/test/testPage3';
+import TestPage1 from '../pages/test/TestPage1';
+import TestPage2 from '../pages/test/TestPage2';
+import TestPage3 from '../pages/test/TestPage3';
 
 const AppRouter = () => {
   return (
