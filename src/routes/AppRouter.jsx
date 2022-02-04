@@ -18,12 +18,20 @@ const AppRouter = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
 
-        <Route element={<PrivateRoute />}>
-          <Route path="/test" element={<TestPage1 />}>
-            <Route path="demo2" element={<TestPage2 />} />
-            <Route path="demo3" element={<TestPage3 />} />
-          </Route>
+        {/* RUTAS CON AUTENTICACIÓN */}
+        <Route
+          path="/test"
+          element={
+            <PrivateRoute>
+              <TestPage1 />
+            </PrivateRoute>
+          }
+        >
+          <Route path="demo2" element={<TestPage2 />} />
+          <Route path="demo3" element={<TestPage3 />} />
+          {/* <Route index element={<TestPage1 />} /> */}
         </Route>
+        {/* FIN RUTAS CON AUTENTICACIÓN */}
 
         <Route path="*" element={<h1>Not Found</h1>}></Route>
       </Routes>

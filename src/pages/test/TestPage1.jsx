@@ -6,7 +6,7 @@ const TestPage1 = () => {
     <>
       <div>Test Page 1</div>
       <Link to="demo2">demo 2</Link>
-      {/* <Outlet /> */}
+      <Outlet />
     </>
   );
 };
