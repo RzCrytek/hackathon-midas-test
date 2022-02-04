@@ -1,0 +1,11 @@
+/*
+===========================
+CONTAINER
+===========================
+*/
+
+.container {
+  // max-width: 1140px; //bootstrap
+  max-width: 1312px; // custom: 1312px
+  @include make-container();
+}

@@ -3,8 +3,6 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import PrivateRoute from './PrivateRoute';
 
-import Header from '../pages/_includes/Header';
-
 import HomePage from '../pages/HomePage';
 import TestPage1 from '../pages/test/testPage1';
 import TestPage2 from '../pages/test/testPage2';
@@ -13,7 +11,6 @@ import TestPage3 from '../pages/test/testPage3';
 const AppRouter = () => {
   return (
     <BrowserRouter>
-      <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
