@@ -1,3 +1,10 @@
+a.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
 .btn {
   display: inline-block;
   background-color: $yellow;
@@ -6,6 +13,7 @@
   min-width: 157px;
   height: 48px;
   padding-inline: 24px;
+  border: 1px solid transparent;
   border-radius: 24px;
   transition: $t-default;
 
@@ -21,5 +29,21 @@
   &.orange {
     background-color: $orange;
     color: $white;
+  }
+
+  &-outline {
+    background-color: transparent;
+    color: $orange;
+    border: 1px solid $orange;
+  }
+
+  &.w-full {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  &.w-257 {
+    max-width: 257px;
+    width: 100%;
   }
 }

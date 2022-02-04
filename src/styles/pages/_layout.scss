@@ -15,8 +15,52 @@ main {
   }
 }
 
+b {
+  font-weight: 700;
+
+  &.medium {
+    font-weight: 500;
+  }
+}
+
 .h1 {
   font-size: 48px;
   font-weight: 700;
   line-height: 64px;
+}
+
+.h2 {
+  font-size: 48px;
+  font-weight: 500;
+  line-height: 64px;
+}
+
+.h3 {
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 48px;
+}
+
+.h5 {
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.c-orange {
+  color: $orange;
+}
+
+.mx-auto {
+  margin-inline: auto;
+}
+
+.list-card-projects {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  div {
+    margin-inline: 20px;
+  }
 }

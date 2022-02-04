@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import './Header.scss';
 
+import LogoMidasTest from '/src/images/logo-midastest.svg';
 import LogoMetaMask from '/src/images/logo-metamask.svg';
 
 const Header = () => {
@@ -24,7 +25,7 @@ const Header = () => {
       </ul> */}
       <div className="container">
         <Link className="logo" to="#!">
-          MIDASTEST
+          <img src={LogoMidasTest} alt="MidasTest" />
         </Link>
 
         <nav>
