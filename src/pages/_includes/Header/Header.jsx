@@ -1,12 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import { useAuthContext } from '../../../context/AuthContext';
+
 import './Header.scss';
 
 import LogoMidasTest from '/src/images/logo-midastest.svg';
 import LogoMetaMask from '/src/images/logo-metamask.svg';
 
 const Header = () => {
+  const { active, connectWallet, disconnectWallet, account } = useAuthContext();
+  console.log('account:', account);
   return (
     <header id="header">
       {/* <ul>
@@ -44,10 +48,17 @@ const Header = () => {
             </li>
           </ul>
 
-          <button className="btn btn-connect">
-            Connect with
-            <img src={LogoMetaMask} alt="Logo MetaMask" />
-          </button>
+          {active ? (
+            <button className="btn btn-connect" onClick={disconnectWallet}>
+              Desconectar
+              <img src={LogoMetaMask} alt="Logo MetaMask" />
+            </button>
+          ) : (
+            <button className="btn btn-connect" onClick={connectWallet}>
+              Connect with
+              <img src={LogoMetaMask} alt="Logo MetaMask" />
+            </button>
+          )}
         </nav>
       </div>
     </header>
