@@ -1,0 +1,24 @@
+#testing {
+  &-wrap {
+    padding: 80px 0 120px;
+  }
+
+  .my-tests {
+    margin-bottom: 40px;
+
+    .box {
+      .top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 32px;
+
+        a {
+          color: rgba($c-1, 0.32);
+          font-weight: 700;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+}

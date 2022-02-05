@@ -47,6 +47,10 @@ b {
   line-height: 32px;
 }
 
+.c-1 {
+  color: $c-1;
+}
+
 .c-orange {
   color: $orange;
 }
@@ -59,8 +63,19 @@ b {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin-inline: -20px;
 
-  div {
+  & > div {
     margin-inline: 20px;
   }
+}
+
+.box {
+  background-color: $white;
+  padding: 32px;
+  border-radius: 32px;
+}
+
+.button-center {
+  text-align: center;
 }

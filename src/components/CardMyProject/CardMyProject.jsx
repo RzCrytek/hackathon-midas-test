@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import styles from './CardProject.module.scss';
+import styles from './CardMyProject.module.scss';
 
 import imageProject from '/src/images/image-project.png';
 import icoCalendar from '/src/images/icons/calendar.svg';
 import icoCoin from '/src/images/icons/coin.svg';
 
-const CardProject = () => {
+const CardMyProject = () => {
   return (
     <div className={styles.card_project}>
       <picture className="card_image">
@@ -16,22 +16,20 @@ const CardProject = () => {
 
       <div className={styles.card_body}>
         <p className={styles.title}>
-          <b>Name project</b>
+          <b>Architectural renaiss Architectural renaiss</b>
         </p>
-        <p className={styles.category}>Adversiting</p>
-
-        <p className={styles.date}>
-          <img src={icoCalendar} alt="ico calendar" />
-          Until Feb 9, 12:00 PST
-        </p>
-        <p className={styles.coin}>
-          <img src={icoCoin} alt="ico coin" />
-          0.0005 MATIC
+        <p className={styles.description}>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper
+          interdum elit vitae eleifend.
         </p>
 
-        <div className="button-center">
+        <div className={styles.buttons}>
           <Link className="btn" to="#!">
             View more
+          </Link>
+
+          <Link className="btn btn-outline" to="#!">
+            Statistics
           </Link>
         </div>
       </div>
@@ -39,4 +37,4 @@ const CardProject = () => {
   );
 };
 
-export default CardProject;
+export default CardMyProject;

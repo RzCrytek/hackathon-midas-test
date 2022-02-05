@@ -28,7 +28,7 @@ const Header = () => {
         </li>
       </ul> */}
       <div className="container">
-        <Link className="logo" to="#!">
+        <Link className="logo" to="/">
           <img src={LogoMidasTest} alt="MidasTest" />
         </Link>
 
@@ -46,6 +46,12 @@ const Header = () => {
             <li>
               <Link to="#!">Help center</Link>
             </li>
+
+            {account && (
+              <li>
+                <Link to="/app">TEST</Link>
+              </li>
+            )}
           </ul>
 
           {active ? (

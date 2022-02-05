@@ -1,0 +1,29 @@
+#my-projects {
+  &-wrap {
+    padding: 104px 0 120px;
+  }
+
+  .create {
+    margin-bottom: 64px;
+
+    .information {
+      &-content {
+        h3 {
+          max-width: 380px;
+          width: 100%;
+        }
+
+        .description {
+          font-size: 14px;
+          color: $mid;
+          line-height: 24px;
+          margin: 24px 0 32px;
+        }
+      }
+    }
+  }
+
+  .list-card-projects {
+    margin-bottom: 48px;
+  }
+}

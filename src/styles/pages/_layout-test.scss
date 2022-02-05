@@ -1,0 +1,45 @@
+.testing-main {
+  h5 {
+    margin-bottom: 32px;
+  }
+
+  .hero {
+    position: relative;
+    background: url('../images/bg-hero-test.jpg') no-repeat center;
+    background-size: cover;
+    height: 432px;
+
+    .container {
+      padding-top: 76px;
+    }
+
+    h1 {
+      font-weight: 700;
+      color: $white;
+      text-align: center;
+    }
+
+    .buttons-together {
+      background-color: $white;
+      max-width: 416px;
+      width: 100%;
+      padding: 8px;
+      border-radius: 32px;
+
+      position: absolute;
+      bottom: -32px;
+      left: 50%;
+      transform: translateX(-50%);
+
+      .btn {
+        background-color: transparent;
+        max-width: 200px;
+        width: 100%;
+
+        &.active {
+          background-color: $yellow;
+        }
+      }
+    }
+  }
+}

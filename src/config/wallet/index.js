@@ -3,10 +3,10 @@ import Web3 from 'web3';
 
 // const supportNetwork =[1, 3, 4, 5, 42];
 
-const EHTERIUM_NETWORK_ID = 1;
+const ETHEREUM_NETWORK_ID = 1;
 
 export const connector = new InjectedConnector({
-  supportedChainIds: [EHTERIUM_NETWORK_ID],
+  supportedChainIds: [ETHEREUM_NETWORK_ID],
 });
 
 export const getLibrary = (provider) => {

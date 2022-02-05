@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import PrivateRoute from './PrivateRoute';
 
 import HomePage from '../pages/HomePage';
-import TestPage1 from '../pages/test/TestPage1';
-import TestPage2 from '../pages/test/TestPage2';
-import TestPage3 from '../pages/test/TestPage3';
+import Testing from '../pages/test/Testing';
+import MyProjects from '../pages/test/MyProjects';
+import Layout from '../pages/test/Layout';
 
 const AppRouter = () => {
   return (
@@ -17,15 +17,16 @@ const AppRouter = () => {
 
         {/* RUTAS CON AUTENTICACIÓN */}
         <Route
-          path="/test"
+          path="/app"
           element={
             <PrivateRoute>
-              <TestPage1 />
+              <Layout />
             </PrivateRoute>
           }
         >
-          <Route path="demo2" element={<TestPage2 />} />
-          <Route path="demo3" element={<TestPage3 />} />
+          <Route path="" element={<Navigate to="testing" />} />
+          <Route path="testing" element={<Testing />} />
+          <Route path="my-projects" element={<MyProjects />} />
           {/* <Route index element={<TestPage1 />} /> */}
         </Route>
         {/* FIN RUTAS CON AUTENTICACIÓN */}
