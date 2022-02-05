@@ -17,6 +17,14 @@
       margin-left: 10px;
     }
   }
+
+  &.multi-input-column {
+    .list-inputs {
+      input {
+        margin-bottom: 16px;
+      }
+    }
+  }
 }
 
 .form-label {

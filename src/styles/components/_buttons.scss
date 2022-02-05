@@ -39,6 +39,10 @@ a.btn {
     background-color: transparent;
     color: $orange;
     border: 1px solid $orange;
+
+    &:hover {
+      background-color: transparent;
+    }
   }
 
   &.w-auto {

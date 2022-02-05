@@ -5,7 +5,7 @@ import imgCover from '/src/images/image-cover.png';
 const Step1ProjectData = () => {
   return (
     <div id="step-1">
-      <div className="row">
+      <div className="row step-row-content">
         <div className="col-md-6">
           <div className="form-group">
             <label className="form-label" htmlFor="">
