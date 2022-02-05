@@ -1,0 +1,31 @@
+.create-project-main {
+  .hero {
+    position: relative;
+    background: url('../images/bg-hero-create-project.jpg') no-repeat center;
+    background-size: cover;
+    height: 432px;
+
+    .container {
+      position: relative;
+      padding-top: 100px;
+      height: 100%;
+    }
+
+    h1 {
+      font-weight: 700;
+      color: $white;
+      text-align: center;
+    }
+
+    .buttons {
+      position: absolute;
+      bottom: -24px;
+      right: 0;
+
+      .btn {
+        max-width: 192px;
+        width: 100%;
+      }
+    }
+  }
+}

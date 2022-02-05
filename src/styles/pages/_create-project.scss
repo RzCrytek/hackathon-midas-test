@@ -1,0 +1,56 @@
+#create-project {
+  &-wrap {
+    padding: 80px 0 104px;
+  }
+
+  .step-content {
+    &-menu {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+
+      .step-menu {
+        background-color: $white;
+        max-width: 192px;
+        width: 100%;
+        padding: 16px 24px;
+        border-radius: 24px;
+
+        &:not(:last-child) {
+          margin-right: 32px;
+        }
+      }
+    }
+
+    &-body {
+      .step-footer {
+        padding-top: 24px;
+        padding-inline: 32px;
+        margin-top: 24px;
+        margin-inline: -32px;
+        border-top: 1px solid $low-gray;
+      }
+    }
+
+    #step-1 {
+      .list-cover {
+        display: flex;
+        flex-wrap: wrap;
+        margin-inline: -8px;
+
+        .cover {
+          width: 104px;
+          margin-inline: 8px;
+          border-radius: 16px;
+          overflow: hidden;
+          cursor: pointer;
+
+          img {
+            width: 100%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  }
+}

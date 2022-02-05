@@ -21,20 +21,29 @@ a.btn {
     background-color: darken($yellow, 10%);
   }
 
-  &.yellow {
+  &--yellow {
     background-color: $yellow;
     color: $c-1;
   }
 
-  &.orange {
+  &--orange {
     background-color: $orange;
     color: $white;
+
+    &:hover {
+      background-color: darken($orange, 10%);
+    }
   }
 
   &-outline {
     background-color: transparent;
     color: $orange;
     border: 1px solid $orange;
+  }
+
+  &.w-auto {
+    width: auto;
+    min-width: inherit;
   }
 
   &.w-full {

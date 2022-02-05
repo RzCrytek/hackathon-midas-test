@@ -48,9 +48,15 @@ const Header = () => {
             </li>
 
             {account && (
-              <li>
-                <Link to="/app">TEST</Link>
-              </li>
+              <>
+                <li>
+                  <Link to="/app">TEST</Link>
+                </li>
+
+                <li>
+                  <Link to="/app/create-project">CREATE</Link>
+                </li>
+              </>
             )}
           </ul>
 
