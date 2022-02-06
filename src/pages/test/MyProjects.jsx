@@ -116,7 +116,7 @@ const MyProjects = () => {
                   <b>Projects</b>
                 </h5>
 
-                <div className="list-card-projects list-new-projects">
+                {/* {<div className="list-card-projects list-new-projects">
                   {myProjects.map((v, i) => (
                     <CardMyProject 
                       key={i}
@@ -125,7 +125,7 @@ const MyProjects = () => {
                       status={v.status}
                     />
                   ))}
-                </div>
+                </div>} */}
 
                 <div className="table-content">
                   <table className="table">
