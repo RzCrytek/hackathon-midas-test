@@ -1,17 +1,82 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useOutletContext } from 'react-router-dom';
 
 import CardMyProject from '../../components/CardMyProject/CardMyProject';
 
 import image3 from '/src/images/image-3.png';
 import imgCoin from '/src/images/icons/coin.svg';
+import { useAuthContext } from '../../context/AuthContext';
+import { ethers } from 'ethers';
+import { CATEGORY_DICT, CONTRACT_ADDRESS, DATE_OPTIONS, PROJECT_STATUS_ACTIONS_DICT, PROJECT_STATUS_DICT } from '../../utils/constants/constants';
+import midasTest from '../../utils/json/MidasTest.json';
 
 const MyProjects = () => {
   const { setPageId } = useOutletContext();
+  const { currentAccount } = useAuthContext();
+
+  const [myProjects, setMyProjects] = useState([]);
+
+  const getMyProjects = async () => {
+
+    try {
+      const {ethereum} = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, midasTest.abi, signer);
+
+        const projects = await connectedContract.getUserCreatedProjects();
+
+        if (projects.length != 0) {
+          let auxList = [];
+
+          for (let projectId of projects) {
+            let project = await getProjectInfo(projectId);
+            auxList.push(project);
+          }
+
+          setMyProjects(auxList);
+
+          console.log("Projects obtained!");
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+
+  }
+
+  const getProjectInfo = async (id) => {
+    try {
+      const {ethereum} = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, midasTest.abi, signer);
+
+        const projectInfo = await connectedContract.getProjectInfo(id);
+
+        console.log(projectInfo);
+        console.log("Obtained Project!");
+
+        return projectInfo;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   useEffect(() => {
     setPageId('my-projects');
   }, []);
+
+  useEffect(() => {
+    if (currentAccount !== null) {
+      getMyProjects();
+    }
+  }, [currentAccount]);
 
   return (
     <section id="my-projects-wrap">
@@ -32,7 +97,7 @@ const MyProjects = () => {
                     data.
                   </p>
 
-                  <Link className="btn" to="#!">
+                  <Link className="btn" to="/app/create-project">
                     Create project
                   </Link>
                 </div>
@@ -52,8 +117,13 @@ const MyProjects = () => {
                 </h5>
 
                 <div className="list-card-projects list-new-projects">
-                  {[...new Array(4)].map((v, i) => (
-                    <CardMyProject key={i} />
+                  {myProjects.map((v, i) => (
+                    <CardMyProject 
+                      key={i}
+                      projectDetails={v.projectDetails}
+                      deadline={v.deadline}
+                      status={v.status}
+                    />
                   ))}
                 </div>
 
@@ -69,17 +139,21 @@ const MyProjects = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {[...new Array(14)].map((v, i) => (
-                        <tr key={i}>
-                          <td>Shark project</td>
-                          <td>Open</td>
-                          <td>Travels & tourism</td>
-                          <td>01-05-2022</td>
-                          <td className="more">
-                            <Link to="#!">View more</Link>
-                          </td>
-                        </tr>
-                      ))}
+                      {myProjects.map((v, i) => {
+                          const details = JSON.parse(v.projectDetails);
+                          const expired = Date.now() > v.deadline.toNumber()*1000;
+                          console.log(expired);
+                          return <tr key={i}>
+                            <td>{details.title}</td>
+                            <td>{expired ? "Closed" : PROJECT_STATUS_DICT[v.status.toString()]}</td>
+                            <td>{CATEGORY_DICT[details.category]}</td>
+                            <td>{new Date(v.createdAt.toNumber()*1000).toLocaleString("en", DATE_OPTIONS)}</td>
+                            <td className="more">
+                              <Link to="#!">{PROJECT_STATUS_ACTIONS_DICT[v.status.toString()]}</Link>
+                            </td>
+                          </tr>
+                        })
+                      }
                     </tbody>
                   </table>
                 </div>

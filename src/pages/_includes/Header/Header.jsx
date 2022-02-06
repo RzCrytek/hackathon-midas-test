@@ -9,8 +9,8 @@ import LogoMidasTest from '/src/images/logo-midastest.svg';
 import LogoMetaMask from '/src/images/logo-metamask.svg';
 
 const Header = () => {
-  const { active, connectWallet, disconnectWallet, account } = useAuthContext();
-  console.log('account:', account);
+  const { userData, currentAccount, connectWallet, getUserData } = useAuthContext();
+  console.log('account:', currentAccount);
   return (
     <header id="header">
       {/* <ul>
@@ -35,7 +35,7 @@ const Header = () => {
         <nav>
           <ul>
             <li>
-              <Link to="#!">Home</Link>
+              <Link to="/home">Home</Link>
             </li>
             <li>
               <Link to="#!">Test world</Link>
@@ -47,7 +47,7 @@ const Header = () => {
               <Link to="#!">Help center</Link>
             </li>
 
-            {account && (
+            {currentAccount !== null && (
               <>
                 <li>
                   <Link to="/app">TEST</Link>
@@ -60,10 +60,10 @@ const Header = () => {
             )}
           </ul>
 
-          {active ? (
-            <button className="btn btn-connect" onClick={disconnectWallet}>
-              Desconectar
-              <img src={LogoMetaMask} alt="Logo MetaMask" />
+          {currentAccount !== null ? (
+            <button className="btn btn-connect" style={{justifyContent: 'center'}}>
+              Hi, {userData ? userData.nickname : null}!
+              {/* <img src={LogoMetaMask} alt="Logo MetaMask" /> */}
             </button>
           ) : (
             <button className="btn btn-connect" onClick={connectWallet}>

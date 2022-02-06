@@ -6,8 +6,15 @@ import styles from './CardMyProject.module.scss';
 import imageProject from '/src/images/image-project.png';
 import icoCalendar from '/src/images/icons/calendar.svg';
 import icoCoin from '/src/images/icons/coin.svg';
+import { cropAtLengthIdx, PROJECT_STATUS_ACTIONS_DICT, PROJECT_STATUS_DICT } from '../../utils/constants/constants';
 
-const CardMyProject = () => {
+const CardMyProject = (props) => {
+
+  const details = JSON.parse(props.projectDetails);
+  
+  const cover =  details.projectImages.filter(image => image.cover === true)[0].url
+
+
   return (
     <div className={styles.card_project}>
       <picture className="card_image">
@@ -16,20 +23,20 @@ const CardMyProject = () => {
 
       <div className={styles.card_body}>
         <p className={styles.title}>
-          <b>Architectural renaiss Architectural renaiss</b>
+          <b>{cropAtLengthIdx(30, details.title)}</b>
         </p>
         <p className={styles.description}>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam semper
-          interdum elit vitae eleifend.
+          {cropAtLengthIdx(80, details.description)}
         </p>
 
         <div className={styles.buttons}>
-          <Link className="btn" to="#!">
-            View more
-          </Link>
+
+          <div style={{height: "48px", display: "flex", justifyContent: "center", alignItems: "center", marginBottom: "10px", color: "#676596"}}>
+            <p>{PROJECT_STATUS_DICT[props.status.toString()]}</p>
+          </div>
 
           <Link className="btn btn-outline" to="#!">
-            Statistics
+            {PROJECT_STATUS_ACTIONS_DICT[props.status.toString()]}
           </Link>
         </div>
       </div>

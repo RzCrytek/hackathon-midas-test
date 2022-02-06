@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import CardProject from '../components/CardProject/CardProject';
 
@@ -9,8 +9,83 @@ import image1 from '/src/images/image-1.png';
 import image2 from '/src/images/image-2.png';
 import LogoDiscord from '/src/images/logo-discord.svg';
 import imgSmartContract from '/src/images/smart-contract.png';
+import { useAuthContext } from '../context/AuthContext';
+import { ethers } from 'ethers';
+import { CONTRACT_ADDRESS } from '../utils/constants/constants';
+import midasTest from "../utils/json/MidasTest.json"
+
 
 const HomePage = () => {
+
+  const { currentAccount } = useAuthContext();
+
+  const [homeProjects, setHomeProjects] = useState([]);
+
+  const getProjectsForHome = async () => {
+    try {
+      const {ethereum} = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, midasTest.abi, signer);
+
+        const obtainedData = await connectedContract.getAllProjects();
+
+        console.log("Start querying projects");
+
+        if (obtainedData.length != 0) {
+          let auxList = [];
+
+          if (obtainedData.length <= 4) {
+            for (let projectId of obtainedData) {
+              let project = await getProjectInfo(projectId);
+              auxList.push(project);
+            }
+          } else {
+            for (let i = 0; i < 4; i++) {
+              let project = await getProjectInfo(obtainedData[i]);
+              auxList.push(project);
+            }
+          }
+
+          setHomeProjects(auxList);
+        }
+
+        console.log("Projects obtained!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const getProjectInfo = async (id) => {
+    try {
+      const {ethereum} = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, midasTest.abi, signer);
+
+        const obtainedData = await connectedContract.getProjectInfo(id);
+
+        console.log(obtainedData);
+        console.log("Obtained Project!");
+
+        return obtainedData;
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useEffect(() => {
+    if (currentAccount !== null) {
+      getProjectsForHome();
+    }
+  }, [currentAccount]);
+
   return (
     <Layout pageId="home">
       <section id="hero" className="hero">
@@ -34,8 +109,13 @@ const HomePage = () => {
           </h2>
 
           <div className="list-card-projects list-new-projects">
-            {[...new Array(4)].map((v, i) => (
-              <CardProject key={i} />
+            {homeProjects.map((v, i) => (
+              <CardProject 
+                key={i}
+                projectDetails={v.projectDetails}
+                deadline={v.deadline}
+                maxTesters={v.maxTestersQuantity}
+                investment={v.investment} />
             ))}
           </div>
 

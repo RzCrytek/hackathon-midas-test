@@ -4,7 +4,12 @@ import logoMeta from '/src/images/logo-metamask.svg';
 import icoInfo from '/src/images/icons/info.svg';
 import icoConfirmed from '/src/images/icons/confirmed.svg';
 
-const Step4Investment = () => {
+const Step4Investment = (props) => {
+
+  const handleInvestmentChange = e => {
+    props.setInvestment(e.target.value);
+  }
+
   return (
     <div id="step-4">
       <div className="row step-row-content">
@@ -20,13 +25,14 @@ const Step4Investment = () => {
               className="form-control"
               type="number"
               placeholder="Number..."
+              onChange={handleInvestmentChange}
             />
           </div>
 
-          <button className="btn btn--yellow btn-transfer" type="button">
+          {/* {<button className="btn btn--yellow btn-transfer" type="button">
             <img src={logoMeta} alt="Logo Metamask" />
             <span>Transfer from my wallet</span>
-          </button>
+          </button>} */}
 
           <div className="investment-details">
             <div className="item">
@@ -37,25 +43,25 @@ const Step4Investment = () => {
               <table>
                 <tr>
                   <td>Investment:</td>
-                  <td>200 MATIC</td>
+                  <td>{props.investment ? props.investment : "-"} MATIC</td>
                 </tr>
                 <tr>
                   <td>Plataform fee:</td>
-                  <td>10 MATIC</td>
+                  <td>50 MATIC</td>
                 </tr>
                 <tr>
                   <td>Gas fees:</td>
-                  <td>5 MATIC</td>
+                  <td>-</td>
                 </tr>
                 <tr>
-                  <td colspan="2" height="16px"></td>
+                  <td colSpan="2" height="16px"></td>
                 </tr>
                 <tr>
                   <td>
                     <b>TOTAL:</b>
                   </td>
                   <td>
-                    <b>215 MATIC</b>
+                    <b>{props.investment ? parseInt(props.investment) + 50 : "-"} MATIC</b>
                   </td>
                 </tr>
               </table>

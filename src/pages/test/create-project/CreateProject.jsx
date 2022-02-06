@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import Layout from './Layout';
 import Step1ProjectData from './steps/Step1ProjectData';
@@ -9,27 +9,125 @@ import Step4Investment from './steps/Step4Investment';
 const CreateProject = () => {
   const [activeTab, setActiveTab] = useState('tab1');
 
+  const [step1Complete, setStep1Complete] = useState(false);
+  const [step2Complete, setStep2Complete] = useState(false);
+  const [step3Complete, setStep3Complete] = useState(false);
+  const [step4Complete, setStep4Complete] = useState(false);
+
+
+  const [projectDetails, setProjectDetails] = useState(
+    {
+      title: null,
+      description: null,
+      category: null,
+      agreementUrl: null,
+      projectImages: []
+    }
+  );
+
+  const [restrictionDetails, setRestrictionDetails] = useState(
+    {
+      minAge: null,
+      maxAge: null,
+      targetCountry: null,
+      minimumCompletion: null
+    }
+  );
+
+  const [deadline, setDeadline] = useState(null);
+  const [testType, setTestType] = useState(null);
+  const [projectQuestions, setProjectQuestions] = useState([]);
+  const [maxTesters, setMaxTesters] = useState(null);
+  const [investment, setInvestment] = useState(null);
+
+  useEffect(() => {
+    setStep1Complete(Object.values(projectDetails).every(x => x !== null && x.length !== 0 && x !== '') && deadline)
+  }, [projectDetails, deadline]);
+
+  useEffect(() => {
+    setStep3Complete(Object.values(restrictionDetails).every(x => x !== null && x.length !== 0 && x !== '') && maxTesters)
+  }, [restrictionDetails, maxTesters]);
+
+  useEffect(() => {
+    setStep2Complete(
+      testType !== null &&
+      (
+        (testType === "QUESTIONS" &&
+        projectQuestions.length > 0) ||
+        testType === "RATING"
+      )
+    );
+  }, [projectQuestions, testType]);
+
+  useEffect(() => {
+    setStep4Complete(investment > 50);
+  }, [investment])
+
+  useEffect(() => {
+    if (step4Complete) {
+      console.log(projectDetails);
+      console.log(restrictionDetails);
+      console.log(deadline);
+      console.log(testType);
+      console.log(projectQuestions);
+      console.log(maxTesters);
+      console.log(investment);
+    }
+  }, [step4Complete]);
+
   const tabSwitch = (activeTab) => {
     switch (activeTab) {
       case 'tab1':
-        return <Step1ProjectData />;
+        return <Step1ProjectData 
+          projectDetails={projectDetails}
+          setProjectDetails={setProjectDetails}
+          setDeadline={setDeadline}
+          completed={step1Complete}
+          setActiveTab={setActiveTab}
+        />;
 
       case 'tab2':
-        return <Step2TypeQuestions />;
+        return <Step2TypeQuestions 
+          testType={testType}
+          setTestType={setTestType}
+          projectImages={projectDetails.projectImages}
+          projectQuestions={projectQuestions}
+          setProjectQuestions={setProjectQuestions}
+          setActiveTab={setActiveTab}
+          completed={step2Complete}
+        />;
 
       case 'tab3':
-        return <Step3UserInformation />;
+        return <Step3UserInformation 
+          setRestrictionDetails={setRestrictionDetails}
+          setMaxTesters={setMaxTesters}
+          setActiveTab={setActiveTab}
+          completed={step3Complete}
+        />;
 
       case 'tab4':
-        return <Step4Investment />;
+        return <Step4Investment 
+          setInvestment={setInvestment}
+          investment={investment}
+        />;
 
       default:
         return <Step1ProjectData />;
     }
   };
 
+  const values = {
+    projectDetails,
+    restrictionDetails,
+    deadline,
+    testType,
+    projectQuestions,
+    maxTesters,
+    investment
+  }
+
   return (
-    <Layout pageId="create-project">
+    <Layout pageId="create-project" ready={step4Complete} values={values}>
       <div id="create-project-wrap" className="container">
         <div className="row">
           <div className="col-md-10 mx-auto">
@@ -46,7 +144,7 @@ const CreateProject = () => {
                   </p>
 
                   <p className="step-name">
-                    <b>Project data</b>
+                    <b>Project data {step1Complete ? null : null}</b>
                   </p>
                 </div>
 

@@ -10,6 +10,9 @@ export default defineConfig({
   },
   alias: {
     web3: path.resolve(__dirname, './node_modules/web3/dist/web3.min.js'),
+    http: require.resolve('rollup-plugin-node-builtins'),
+    stream: require.resolve('rollup-plugin-node-builtins'),
+    url: require.resolve('rollup-plugin-node-builtins'),
   },
   plugins: [react()],
   define: {

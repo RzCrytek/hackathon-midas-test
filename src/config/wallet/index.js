@@ -6,7 +6,7 @@ import Web3 from 'web3';
 const ETHEREUM_NETWORK_ID = 1;
 
 export const connector = new InjectedConnector({
-  supportedChainIds: [ETHEREUM_NETWORK_ID],
+  supportedChainIds: [31337],
 });
 
 export const getLibrary = (provider) => {
