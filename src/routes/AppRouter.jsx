@@ -8,6 +8,9 @@ import Testing from '../pages/test/Testing';
 import MyProjects from '../pages/test/MyProjects';
 import Layout from '../pages/test/Layout';
 import CreateProject from '../pages/test/create-project/CreateProject';
+import ProjectView from '../pages/test/project/ProjectView';
+import ProjectTerms from '../pages/test/project/ProjectTerms';
+import ProjectTesting from '../pages/test/project/ProjectTesting';
 
 const AppRouter = () => {
   return (
@@ -36,6 +39,33 @@ const AppRouter = () => {
           element={
             <PrivateRoute>
               <CreateProject />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="app/project/name/view"
+          element={
+            <PrivateRoute>
+              <ProjectView />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="app/project/name/terms"
+          element={
+            <PrivateRoute>
+              <ProjectTerms />
+            </PrivateRoute>
+          }
+        />
+
+        <Route
+          path="app/project/name/testing"
+          element={
+            <PrivateRoute>
+              <ProjectTesting />
             </PrivateRoute>
           }
         />

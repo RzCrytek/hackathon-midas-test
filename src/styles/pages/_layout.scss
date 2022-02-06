@@ -47,6 +47,12 @@ b {
   line-height: 32px;
 }
 
+.h6 {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
 .c-1 {
   color: $c-1;
 }
@@ -57,6 +63,10 @@ b {
 
 .c-orange {
   color: $orange;
+}
+
+.c-bot {
+  color: $bot;
 }
 
 .mx-auto {
