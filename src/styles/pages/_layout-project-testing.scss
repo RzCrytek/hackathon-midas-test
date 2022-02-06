@@ -1,0 +1,131 @@
+.project-testing-main {
+  color: $mid;
+
+  .hero {
+    position: relative;
+    background: url('../images/bg-hero-project.jpg') no-repeat center;
+    background-size: cover;
+    height: 288px;
+
+    .container {
+      position: relative;
+      display: flex;
+      align-items: flex-end;
+      padding-bottom: 24px;
+      height: 100%;
+    }
+
+    h1 {
+      font-weight: 700;
+      color: $white;
+      text-align: center;
+    }
+
+    .buttons {
+      position: absolute;
+      bottom: -24px;
+      right: 0;
+
+      .btn {
+        max-width: 192px;
+        width: 100%;
+      }
+    }
+  }
+
+  & > .container {
+    padding-top: 64px;
+    padding-bottom: 120px;
+  }
+
+  .project-wrapper {
+    padding: 64px 0 120px;
+  }
+}
+
+#projectView {
+  .description {
+    margin: 15px 0 30px;
+  }
+
+  .category {
+    .tag {
+      background-color: $low-gray;
+      border-radius: 16px;
+      padding: 8px 16px;
+    }
+  }
+
+  .info {
+    margin-top: 38px;
+
+    p {
+      display: flex;
+      align-items: center;
+
+      img {
+        margin-right: 8px;
+      }
+
+      &:not(:last-child) {
+        margin-bottom: 16px;
+      }
+    }
+  }
+}
+
+#projectTerms {
+  .terms-content {
+    background-color: $low-gray;
+    border-radius: 16px;
+    padding: 32px 48px;
+    text-align: center;
+
+    h5 {
+      margin-bottom: 30px;
+    }
+
+    .description {
+      p {
+        margin-bottom: 24px;
+      }
+    }
+
+    .btn {
+      margin-top: 88px;
+    }
+  }
+}
+
+#projectTesting {
+  .box {
+    display: flex;
+    padding: 0;
+    min-height: 742px;
+  }
+
+  .image {
+    background-color: $mid;
+    width: 50%;
+    border-top-left-radius: 32px;
+    border-bottom-left-radius: 32px;
+  }
+
+  .information {
+    width: 50%;
+    padding: 32px;
+  }
+
+  .step-description {
+    h6 {
+      margin-bottom: 16px;
+    }
+
+    .btn {
+      margin-top: 48px;
+    }
+  }
+
+  .step-testing {
+  }
+}
