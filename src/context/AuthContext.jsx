@@ -8,8 +8,8 @@ import {
 
 import { ethers } from "ethers";
 
-import { useWeb3React } from '@web3-react/core';
-import { connector } from '../config/wallet';
+// import { useWeb3React } from '@web3-react/core';
+// import { connector } from '../config/wallet';
 import { CONTRACT_ADDRESS } from '../utils/constants/constants';
 import midasTest from "../utils/json/MidasTest.json"
 

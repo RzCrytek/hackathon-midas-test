@@ -43,6 +43,33 @@ const ProjectTesting = () => {
     }
   }
 
+  const updateEnrollment = async (e) => {
+    
+    try {
+      const {ethereum} = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, midasTest.abi, signer);
+
+        let updateEnrollmentTxn = await connectedContract.updateEnrollmentResult(
+          parseInt(parseInt(eid)),
+          parseInt(1),
+          answers
+        );
+
+        console.log("Executing the transaction...");
+
+        await updateEnrollmentTxn.wait();
+
+        alert(`Great! You've won ${ethers.utils.formatEther(project.investment.div(project.maxTestersQuantity).toString())} MATIC for testing this project.`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     if (currentAccount !== null) {
       getProjectInfo(parseInt(name));
@@ -68,6 +95,26 @@ const ProjectTesting = () => {
     const auxDict = {...answers}
 
     auxDict[n] = v;
+
+    setAnswers(auxDict);
+  }
+
+  const handleOnSetComment = (e) => {
+    const v = e.target.value;
+    
+    const auxDict = {...answers}
+
+    auxDict['comments'] = v;
+
+    setAnswers(auxDict);
+  }
+
+  const handleOnSetRate = (e) => {
+    const v = e.target.value;
+    
+    const auxDict = {...answers}
+
+    auxDict['rate'] = v;
 
     setAnswers(auxDict);
   }
@@ -116,6 +163,9 @@ const ProjectTesting = () => {
                   placeholder="Your comments"
                   rows="7"
                 ></textarea>
+                <button className="btn btn--orange" type="button" onClick={updateEnrollment}>
+                  Upload
+                </button>
               </div> : 
               <div>{questions.map((v, i) => {
                 if (v.type === "FREE") {
@@ -124,9 +174,10 @@ const ProjectTesting = () => {
                     <textarea
                       id=""
                       className="form-control"
-                      name=""
+                      name={i}
                       placeholder="Your comments"
                       rows="7"
+                      onChange={handleOnAnswer}
                     ></textarea>
                   </div>
                 } else {
@@ -149,7 +200,7 @@ const ProjectTesting = () => {
               <label className="form-label" htmlFor="">
                   Project rate
                 </label>
-                <input type="number" className="form-control" placeholder='Rate the project from 0 to 5'/>
+                <input type="number" className="form-control" placeholder='Rate the project from 0 to 5' onChange={handleOnSetRate}/>
         
                 <label className="form-label" htmlFor="">
                   Comments
@@ -160,7 +211,11 @@ const ProjectTesting = () => {
                   name=""
                   placeholder="Your comments"
                   rows="7"
+                  onChange={handleOnSetComment}
                 ></textarea>
+                <button className="btn btn--orange" type="button" onClick={updateEnrollment}>
+                  Upload
+                </button>
               </div>
             }
 

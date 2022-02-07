@@ -1,6 +1,6 @@
 import { create } from "ipfs-http-client";
 
-export const CONTRACT_ADDRESS = "0x4826533B4897376654Bb4d4AD88B7faFD0C98528";
+export const CONTRACT_ADDRESS = "0x7bc06c482DEAd17c0e297aFbC32f6e63d3846650";
 export const DATE_OPTIONS = {
     weekday: "short",
     year: "numeric",
