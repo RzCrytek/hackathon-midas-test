@@ -60,7 +60,7 @@ const CreateProject = () => {
   }, [projectQuestions, testType]);
 
   useEffect(() => {
-    setStep4Complete(investment > 50);
+    setStep4Complete(investment >= 1);
   }, [investment])
 
   useEffect(() => {

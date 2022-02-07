@@ -44,6 +44,8 @@ const ProjectTesting = () => {
   }
 
   const updateEnrollment = async (e) => {
+
+    console.log(answers);
     
     try {
       const {ethereum} = window;
@@ -56,7 +58,7 @@ const ProjectTesting = () => {
         let updateEnrollmentTxn = await connectedContract.updateEnrollmentResult(
           parseInt(parseInt(eid)),
           parseInt(1),
-          answers
+          JSON.stringify(answers)
         );
 
         console.log("Executing the transaction...");

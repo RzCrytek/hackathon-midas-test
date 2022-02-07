@@ -47,7 +47,7 @@ const Step4Investment = (props) => {
                 </tr>
                 <tr>
                   <td>Plataform fee:</td>
-                  <td>50 MATIC</td>
+                  <td>1 MATIC</td>
                 </tr>
                 <tr>
                   <td>Gas fees:</td>
@@ -61,7 +61,7 @@ const Step4Investment = (props) => {
                     <b>TOTAL:</b>
                   </td>
                   <td>
-                    <b>{props.investment ? parseInt(props.investment) + 50 : "-"} MATIC</b>
+                    <b>{props.investment ? parseInt(props.investment) + 1 : "-"} MATIC</b>
                   </td>
                 </tr>
               </table>

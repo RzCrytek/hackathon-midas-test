@@ -62,7 +62,7 @@ const Layout = ({ ready, children, pageId, values }) => {
 
         let kickOffProjectTxn = await connectedContract.projectKickOff(
           createdProjectId,
-          {value: ethers.utils.parseEther(`${parseInt(investment) + 50}.0`)}
+          {value: ethers.utils.parseEther(`${parseInt(investment) + 1}.0`)}
         );
 
         await kickOffProjectTxn.wait();
