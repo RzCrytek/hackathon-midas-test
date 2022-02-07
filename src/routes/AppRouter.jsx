@@ -53,7 +53,7 @@ const AppRouter = () => {
         />
 
         <Route
-          path="app/project/:name/terms"
+          path="app/project/:name/enrollment/:eid/terms"
           element={
             <PrivateRoute>
               <ProjectTerms />
@@ -62,7 +62,7 @@ const AppRouter = () => {
         />
 
         <Route
-          path="app/project/:name/testing"
+          path="app/project/:name/enrollment/:eid/testing"
           element={
             <PrivateRoute>
               <ProjectTesting />

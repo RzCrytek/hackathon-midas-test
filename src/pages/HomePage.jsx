@@ -115,7 +115,8 @@ const HomePage = () => {
                 projectDetails={v.projectDetails}
                 deadline={v.deadline}
                 maxTesters={v.maxTestersQuantity}
-                investment={v.investment} />
+                investment={v.investment}
+                id={v.id} />
             ))}
           </div>
 

@@ -41,7 +41,7 @@ const CardProject = (props) => {
         </p>
 
         <div className="button-center">
-          <Link className="btn" to="#!">
+          <Link className="btn" to={props.enrollmentId ? `/app/project/${props.id.toString()}/enrollment/${props.enrollmentId}/terms` : `app/project/${props.id.toString()}/view`}>
             View more
           </Link>
         </div>

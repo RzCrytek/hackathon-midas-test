@@ -15,6 +15,8 @@ const Testing = () => {
 
   const [allOpenedProjects, setAllOpenedProjects] = useState([]);
 
+  const [userEnrollments, setUserEnrollments] = useState([]);
+
   const getAllOpenedProjects = async () => {
 
     try {
@@ -70,6 +72,57 @@ const Testing = () => {
     }
   }
 
+  const getCurrentUserEnrollments = async () => {
+    try {
+      const {ethereum} = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, midasTest.abi, signer);
+
+        const obtainedData = await connectedContract.getUserEnrollments(currentAccount, false);
+
+        if (obtainedData.length !== 0) {          
+          let auxList = [];
+
+          for (let enrollmentId of obtainedData) {
+            let enrollment = await getEnrollmentInfo(enrollmentId);
+            auxList.push(enrollment);
+          }
+
+          setUserEnrollments(auxList);
+        }
+
+        console.log("Done!");
+
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const getEnrollmentInfo = async (id) => {
+    try {
+      const {ethereum} = window;
+
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum);
+        const signer = provider.getSigner();
+        const connectedContract = new ethers.Contract(CONTRACT_ADDRESS, midasTest.abi, signer);
+
+        const obtainedData = await connectedContract.getTestEnrollment(id);
+        const enrollmentProject = await connectedContract.getTestEnrollmentProjectInfo(id);
+
+        console.log("Done!");
+
+        return [obtainedData, enrollmentProject];
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   useEffect(() => {
     setPageId('testing');
   }, []);
@@ -77,6 +130,7 @@ const Testing = () => {
   useEffect(() => {
     if (currentAccount !== null) {
       getAllOpenedProjects();
+      getCurrentUserEnrollments();
       console.log(allOpenedProjects);
     }
   }, [currentAccount]);
@@ -102,9 +156,17 @@ const Testing = () => {
                 </div>
 
                 <div className="list-card-projects list-new-projects">
-                  {/* {[...new Array(4)].map((v, i) => (
-                    <CardProject key={i} />
-                  ))} */}
+                  {userEnrollments.map((v, i) => (
+                    <CardProject 
+                      key={i} 
+                      projectDetails={v[1].projectDetails}
+                      deadline={v[1].deadline}
+                      maxTesters={v[1].maxTestersQuantity}
+                      investment={v[1].investment}
+                      id={v[1].id}
+                      enrollmentId={v[0].id.toString()}
+                    />
+                  ))}
                 </div>
               </div>
             </section>
@@ -145,7 +207,7 @@ const Testing = () => {
                             </td>
                             <td>{new Date(v[0].deadline.toNumber()*1000).toLocaleString("en", DATE_OPTIONS)}</td>
                             <td className="more">
-                              <Link to="#!">View more</Link>
+                              <Link to={`/app/project/${v[0].id.toString()}/view`}>View more</Link>
                             </td>
                           </tr>
                         }

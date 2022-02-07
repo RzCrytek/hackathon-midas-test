@@ -149,7 +149,7 @@ const MyProjects = () => {
                             <td>{CATEGORY_DICT[details.category]}</td>
                             <td>{new Date(v.createdAt.toNumber()*1000).toLocaleString("en", DATE_OPTIONS)}</td>
                             <td className="more">
-                              <Link to="#!">{PROJECT_STATUS_ACTIONS_DICT[v.status.toString()]}</Link>
+                              <Link to={`/app/project/${v.id.toString()}/view`}>{PROJECT_STATUS_ACTIONS_DICT[v.status.toString()]}</Link>
                             </td>
                           </tr>
                         })
